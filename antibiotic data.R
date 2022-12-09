@@ -41,3 +41,12 @@ data1 %>%
 two_way_ANOVA <- summary(
   aov(percent_resistance ~ hours*antibiotic_treatment, 
       data = data1))
+
+#summary statistics 
+analysis <- data1 %>%
+  group_by(antibiotic_treatment, hours) %>%
+  summarise(median = median(percent_resistance),
+            mean = mean(percent_resistance),
+            variance = var(percent_resistance)) %>%
+  bind_rows()
+
